@@ -1,4 +1,4 @@
-#Optimization algorithms
+# Optimization algorithms
 
 ## installing dependencies
 npm install
