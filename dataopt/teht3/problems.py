@@ -1,14 +1,12 @@
-from sklearn.metrics import r2_score
 import numpy as np
-from pymoo.factory import get_problem, get_visualization
-from scipy.stats import qmc
-from pymoo.algorithms.soo.nonconvex.ga import GA
-from pymoo.optimize import minimize
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.gaussian_process import GaussianProcessRegressor
-from pymoo.core.problem import Problem
 from scipy.stats import norm
+from desdeo_problem import MOProblem, VectorObjective
+from pymoo.core.problem import Problem
+
+"""
+Wrappers and implementations of problems for single and multiobjective optimization
+for pymoo and desdeo interfaces
+"""
 
 class ExpectedImprovement(Problem):
     def __init__(self, p: Problem, model, fxb, xi = 1e-5):
@@ -50,3 +48,39 @@ class Surrogate(Problem):
 
     def _evaluate(self, X, out, *args, **kwargs):
         out["F"] = self.model.predict(X)
+
+def make_surrogate(models, problem: MOProblem):
+    """
+    Problem with evaluation using models
+    """
+    def comp(X):
+        #function values
+        y = np.zeros((len(X), problem.n_of_objectives))
+        for modelI, model in enumerate(models):
+            x_mean = model.predict(X, return_std=False)
+            y[:, modelI] = x_mean
+        return y
+
+    obj_names = [f"f{i}" for i in range(len(models))]
+    objectives = VectorObjective(obj_names, comp)
+    return MOProblem([objectives], problem.variables)
+
+
+
+def make_lcb(models, problem: MOProblem, beta):
+    """
+    Create multiobjective problem with evaluation 
+    with models on lcb with given beta value
+    """
+    def comp_lcb(X):
+        lcbs = np.zeros((len(X), len(models)))
+        for modelI, model in enumerate(models):
+            x_mean, x_std = model.predict(X, return_std=True)
+            x_var = np.sqrt(x_std)
+            lcb = x_mean - beta * x_var
+            lcbs[:, modelI] = lcb
+        return lcbs
+
+    obj_names = [f"f{i}" for i in range(len(models))]
+    objectives = VectorObjective(obj_names, comp_lcb, maximize=False)
+    return MOProblem([objectives], problem.variables)
