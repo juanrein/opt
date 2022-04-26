@@ -1,2 +1,3 @@
 dataopt/**/*.pdf
 __pycache__/
+dataopt/**/*.zip
