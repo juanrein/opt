@@ -43,3 +43,24 @@ def get_data():
     #pandas.concatenate?
     return np.array(X).T
 
+def get_data_df():
+    return pd.read_csv("./data/stock_prices.csv", index_col=0)
+
+def mergeCsvs():
+    """
+    Combines all csv into one containing all the stocks
+    """
+    dataDir = Path("./data")
+    data = None
+    #add each stock as its own column to dataframe
+    for child in dataDir.iterdir():
+        if child.name == "stock_prices.csv":
+            continue
+        stockdf = pd.read_csv(child)
+        x = pd.DataFrame(stockdf["Adj Close"].to_numpy(), columns=[child.name])
+        if data is None:
+            data = x
+        else:
+            data = pd.concat((data, x), axis=1)
+
+    data.to_csv("./data/stock_prices.csv")

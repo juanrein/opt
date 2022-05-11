@@ -3,23 +3,35 @@ import numpy as np
 import math
 import itertools
 import matplotlib.pyplot as plt
+from desdeo_problem import variable_builder, ScalarObjective, MOProblem, VectorObjective
+import pandas as pd
 
-def expected_return(X, w):
-    n, m = X.shape
-    Ror = np.zeros((n-1, m))
-    for i in range(len(X)-1):
-        Ror[i] = (X[i+1] - X[i]) / X[i]
-    means = Ror.mean(axis=0)
-    return np.dot(w, means) * 52
 
-def risk(X, w):
-    n, m = X.shape
-    Ror = np.zeros((n-1, m))
-    for i in range(len(X)-1):
-        Ror[i] = (X[i+1] - X[i]) / X[i]
-    cov = np.cov(Ror.T)
-    return (w.T @ cov @ w)
+def get_markowitz(df: pd.DataFrame, w0):
+    """
+    Construct portfolio optimization problem
+    based on historical data in dataframe
+    and initial weights for assets
+    """
+    n = len(w0)
+    variables = variable_builder(df.columns, w0, np.zeros(n), np.ones(n))
+    change = df.pct_change()
 
+    means = change.mean(axis=0)
+    cov = change.cov().to_numpy()
+
+    def f1(W):
+        return W @ means
+    
+    def f2(W):
+        return np.array([(w.T @ cov @ w) for w in W])
+
+    expected_return_f = ScalarObjective("expected return", f1, maximize=True)
+    risk_f = ScalarObjective("risk", f2)
+
+    prob = MOProblem(objectives = [expected_return_f, risk_f], variables=variables)
+
+    return prob
 
 def createWeightVectors(M, H):
     """
@@ -38,5 +50,4 @@ def createWeightVectors(M, H):
             U[ui] = np.array(u)
             ui += 1
     return U
-
 
