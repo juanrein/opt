@@ -37,6 +37,7 @@ def get_data():
     X = []
     for child in dataDir.iterdir():
         df = pd.read_csv(child)
+        #maybe use adjusted close
         x = df.get("Close").interpolate().to_numpy()
         X.append(x)
     #pandas.concatenate?

@@ -1,31 +1,42 @@
 from scipy.stats import norm
 import numpy as np
+import math
+import itertools
+import matplotlib.pyplot as plt
 
-def expectedReturn(X, w):
-    """
-    Compute expected return for each stock with given weights
-    Params:
-        X: ndarray(n weeks, n stocks) stock prices
-        w: ndarray(n stocks,) weight for each stock
-    """
-    n,m = X.shape
-    Ror = np.zeros((n-1,m))
+def expected_return(X, w):
+    n, m = X.shape
+    Ror = np.zeros((n-1, m))
     for i in range(len(X)-1):
         Ror[i] = (X[i+1] - X[i]) / X[i]
     means = Ror.mean(axis=0)
-    vars = Ror.std(axis=0)
-    #probability for each value
-    Xp = np.array([norm.pdf(x, loc=m, scale=v) for x,m,v in zip(Ror.T, means, vars)])
-    Xptotal = Xp.sum(axis=1)
-    Xpw = Xptotal.dot(w)
-    return Xpw
+    return np.dot(w, means) * 52
+
+def risk(X, w):
+    n, m = X.shape
+    Ror = np.zeros((n-1, m))
+    for i in range(len(X)-1):
+        Ror[i] = (X[i+1] - X[i]) / X[i]
+    cov = np.cov(Ror.T)
+    return (w.T @ cov @ w)
 
 
-if __name__ == "__main__":
-    import data
-    X = data.get_data()
-    print(X.shape)
-    #equal weights
-    w = np.array([0.25, 0.25, 0.25, 0.25])
-    er = expectedReturn(X,w)
-    print(er)
+def createWeightVectors(M, H):
+    """
+    Creates evenly distributed weight vectors
+    in M dimensional space with H fractions 
+    """
+    # 0/H,1/H,...H/H
+    fractions = np.linspace(0, 1, H+1)
+    N = math.comb(H+M-1, M-1)
+    U = np.zeros((N, M))
+    ui = 0
+    # iterate possible fraction sets and pick those that
+    # add up to 1
+    for u in itertools.product(fractions, repeat=M):
+        if math.isclose(sum(u), 1.0):
+            U[ui] = np.array(u)
+            ui += 1
+    return U
+
+
