@@ -1,6 +1,4 @@
-from urllib.request import urlopen, Request
-from typing import TextIO
-import csv
+from urllib.request import urlopen
 import pandas as pd
 from pathlib import Path
 import os
@@ -44,6 +42,9 @@ def get_data():
     return np.array(X).T
 
 def get_data_df():
+    """
+    Get data as a pandas dataframe
+    """
     return pd.read_csv("./data/stock_prices.csv", index_col=0)
 
 def mergeCsvs():
@@ -56,11 +57,16 @@ def mergeCsvs():
     for child in dataDir.iterdir():
         if child.name == "stock_prices.csv":
             continue
-        stockdf = pd.read_csv(child)
-        x = pd.DataFrame(stockdf["Adj Close"].to_numpy(), columns=[child.name])
+        stockdf = pd.read_csv(child, index_col=0)
+        price = stockdf["Adj Close"].rename(child.name)
         if data is None:
-            data = x
+            data = price
         else:
-            data = pd.concat((data, x), axis=1)
+            data = pd.concat((data, price), axis=1)
 
     data.to_csv("./data/stock_prices.csv")
+
+
+# fetch_stock_prices()
+# mergeCsvs()
+# print(get_data_df())

@@ -1,11 +1,8 @@
 from scipy.stats import norm
 import numpy as np
-import math
-import itertools
-import matplotlib.pyplot as plt
-from desdeo_problem import variable_builder, ScalarObjective, MOProblem, VectorObjective
+from desdeo_problem import variable_builder, ScalarObjective, MOProblem
 import pandas as pd
-
+from pymoo.core.problem import Problem
 
 def get_markowitz(df: pd.DataFrame, w0):
     """
@@ -21,9 +18,15 @@ def get_markowitz(df: pd.DataFrame, w0):
     cov = change.cov().to_numpy()
 
     def f1(W):
+        """
+        Expected return
+        """
         return W @ means
     
     def f2(W):
+        """
+        Risk
+        """
         return np.array([(w.T @ cov @ w) for w in W])
 
     expected_return_f = ScalarObjective("expected return", f1, maximize=True)
@@ -33,21 +36,25 @@ def get_markowitz(df: pd.DataFrame, w0):
 
     return prob
 
-def createWeightVectors(M, H):
-    """
-    Creates evenly distributed weight vectors
-    in M dimensional space with H fractions 
-    """
-    # 0/H,1/H,...H/H
-    fractions = np.linspace(0, 1, H+1)
-    N = math.comb(H+M-1, M-1)
-    U = np.zeros((N, M))
-    ui = 0
-    # iterate possible fraction sets and pick those that
-    # add up to 1
-    for u in itertools.product(fractions, repeat=M):
-        if math.isclose(sum(u), 1.0):
-            U[ui] = np.array(u)
-            ui += 1
-    return U
+class PortfolioSelection(Problem):
+    def __init__(self, df, w0):
+        n = len(w0)
+        xl = np.zeros(n)
+        xu = np.ones(n)
+        super().__init__(n, 2, 0, xl, xu)
+    
+        change = df.pct_change()
 
+        self.means = change.mean(axis=0)
+        self.cov = change.cov().to_numpy()
+        
+    def _evaluate(self, x, out, *args, **kwargs):
+        expected_return = x @ self.means
+        risk = np.array([(w.T @ self.cov @ w) for w in x])
+        out["F"] = np.array([-expected_return, risk]).T
+
+# import data
+# df = data.get_data_df()
+# w0 = np.array([0.25, 0.25, 0.25, 0.25])
+# problem = PortfolioSelection(df, w0)
+# print(problem.evaluate(np.array([[0.25, 0.25, 0.25, 0.25], [0.20, 0.20, 0.20, 0.4]])))
