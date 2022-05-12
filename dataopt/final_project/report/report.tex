@@ -19,6 +19,9 @@
 % \geometry{landscape} % set up the page for landscape
 %   read geometry.pdf for detailed page layout information
 
+\usepackage{setspace}
+\setstretch{1.5}
+
 \usepackage{graphicx} % support the \includegraphics command and options
 
 \usepackage{biblatex} %Imports biblatex package
@@ -33,6 +36,9 @@
 \usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 % These packages are all incorporated in the memoir class to one degree or another...
+
+\usepackage{amsmath}
+
 
 %%% HEADERS & FOOTERS
 \usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
@@ -56,7 +62,8 @@
 
 %%% The "real" document content comes below...
 
-\title{Final project report}
+\title{Final project report\\
+	   Portfolio optimization}
 \author{Juha Reinikainen}
 %\date{} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed 
@@ -66,8 +73,38 @@
 
 \section{Problem}
 
+Portfolio optimization involves deciding how to use the available investment budget to maximize the total value of the investment and minimize its risk \cite{van2021parden}. The investment budget is allocated to assets which can be for example stocks, gold, foreign exchange, real estate, bonds and cryptocurrencies \cite{faizan2019multiobjective}. For simplicity only stocks are considered in this project.
+
+The problem is difficult because there is a large number of possible assets to include in the portfolio and even larger number of ways to divide the budget among them. Investing also has a lot of uncertainty as stock prices are affected by real world events which are hard to capture in the model \cite{du2020new}.
+
+\section{Data}
+
+Data-driven approach to this problem involves predicting expected return and risk based on historical time-series data of stock prices over given time range, possibly years. Stock price can be sampled e.g. daily, weekly, monthly or quaterly. The stocks that are included in the data-set need to be selected.
+
+The stock price data was collected from Yahoo Finance by calling its api with different stocks and merging these into one dataset. For example the weekly prices between 2021-05-09 20:55:46 and 2022-05-09 20:55:46 can be queried using following url.
+
+\url{https://query1.finance.yahoo.com/v7/finance/download/ADS.DE?period1=1620582946&period2=1652118946&interval=1wk&events=history&includeAdjustedClose=true}
+
+Where perdiod1 and period2 are the start and end times of the range as unix timestamps. 
 
 \section{Modelling}
+
+The problem can be modelled as a two objective optimization problem maximing expected return of the investment and minimizing its risk. The decision vector consist of proportions of total budget allocated to n stocks.
+
+\begin{equation}
+\begin{split}
+w = (w_1, w_2, ..., w_n)\\
+\Sigma_{i=1}^{n} w_i = 1\\
+0 \leq w_i \leq 1, i = 1...n
+\end{split}
+\end{equation}
+
+Popular way to model these objectives is Markowitz model which is also known as mean-variance model and generalized as modern portfolio theory \cite{kolm201460}.
+
+Return of an investment between time t-1 to t is calculated by where p(t) and p(t-1) are stock prices at given time.
+
+$roi = \frac{p(t) - p(t-1)}{p(t-1)}$
+
 
 \section{Algorithm}
 
