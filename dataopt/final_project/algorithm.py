@@ -2,6 +2,7 @@ import itertools
 import math
 import numpy as np
 from pymoo.core.repair import Repair
+from pymoo.core.population import Population
 
 class OneSumRepair(Repair):
     def _do(self, problem, pop, **kwargs):
@@ -20,21 +21,12 @@ class OneSumRepair(Repair):
         return pop
 
 # print(repair(np.array([[0,1,2], [1/3, 1/3, 1/3], [0.25, 0.25, 1]])))
-def createWeightVectors(M, H):
+def createWeightVectors(n_vectors, n_weights):
     """
-    Creates evenly distributed weight vectors
-    in M dimensional space with H fractions 
+    Creates weight vectors
     """
-    # 0/H,1/H,...H/H
-    fractions = np.linspace(0, 1, H+1)
-    N = math.comb(H+M-1, M-1)
-    U = np.zeros((N, M))
-    ui = 0
-    # iterate possible fraction sets and pick those that
-    # add up to 1
-    for u in itertools.product(fractions, repeat=M):
-        if math.isclose(sum(u), 1.0):
-            U[ui] = np.array(u)
-            ui += 1
-    return U
-
+    repair = OneSumRepair()
+    X = np.random.random((n_vectors,n_weights))
+    P = Population.create(X)
+    W = repair.do(None, P)
+    return W
