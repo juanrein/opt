@@ -20,31 +20,35 @@ class PortfolioSelection(Problem):
           both objective can be minimized
     """
 
-    def __init__(self, df, w0, w_min, w_max, c_min, c_max):
-        n = len(w0)
-        xl = np.full(n, w_min)
-        xu = np.full(n, w_max)
-        super().__init__(n, 2, 2, xl, xu)
+    def __init__(self, df, w_min, w_max, c_min, c_max, n_stocks):
+        xl = np.concatenate((np.full(n_stocks, w_min), np.zeros(n_stocks, dtype=int)))
+        xu = np.concatenate((np.full(n_stocks, w_max), np.ones(n_stocks, dtype=int)))
+
+        super().__init__(2 * n_stocks, 2, 2, xl, xu)
 
         self.w_min = w_min
         self.w_max = w_max
         self.c_min = c_min
         self.c_max = c_max
+        self.n_stocks = n_stocks
 
         change = df.pct_change()
 
         self.means = change.mean(axis=0)
         self.cov = change.cov()
 
-    def _evaluate(self, W, out, *args, **kwargs):
-        expected_return = W @ self.means
+    def _evaluate(self, X, out, *args, **kwargs):
+        W = X[:, :self.n_stocks]
+        Y = X[:, self.n_stocks:]
+        WW = W * Y
+        expected_return = WW @ self.means
         
-        risk = np.array([(w.T @ self.cov @ w) for w in W])
+        risk = np.array([(w.T @ self.cov @ w) for w in WW])
 
-        n_stocks = np.logical_and(W >= self.w_min, W <= self.w_max).sum(axis=1)
+        n_stocks_in_portfolio = Y.sum(axis=1)
         #n_stocks in solution needs to be between c_min and c_max
-        g1 = n_stocks - self.c_max
-        g2 = self.c_min - n_stocks
+        g1 = n_stocks_in_portfolio - self.c_max
+        g2 = self.c_min - n_stocks_in_portfolio
 
         out["F"] = np.array([-expected_return, risk]).T
         out["G"] = np.array([g1, g2]).T
@@ -64,7 +68,6 @@ class PortfolioSelectionArima(Problem):
     note: expected return is negated here so
           both objective can be minimized
     """
-
     def __init__(self, df, w0, w_min, w_max, c_min, c_max):
         n = len(w0)
         xl = np.full(n, w_min)
