@@ -58,7 +58,7 @@ STOCKNAMES = [
     "VNA.DE",
 ]
 FILENAME = "./data/stock_prices.csv"
-STARTDATE = int(datetime(2020, 1, 1).timestamp())
+STARTDATE = int(datetime(2018, 1, 1).timestamp())
 ENDDATE = int(datetime(2022, 1, 1).timestamp())
 
 def fetch_stock_prices():
@@ -84,7 +84,6 @@ def fetch_stock_prices():
             data = pd.concat((data, price), axis=1)
 
     data.to_csv(FILENAME)
-
 
 def get_data_df():
     """

@@ -1,5 +1,7 @@
+from xml.dom.expatbuilder import parseFragmentString
 import numpy as np
 from pymoo.core.problem import Problem
+from statsmodels.tsa.arima.model import ARIMA
 
 
 class PortfolioSelection(Problem):
@@ -9,17 +11,25 @@ class PortfolioSelection(Problem):
     maximize expected return 
     and minimize risk
     subject to
-    0 <= wi <= 1
-    sum(wi) = 1
+        w_min <= wi <= w_max
+        sum(wi) = 1
+        Cardinality constraint
+            there need to be between c_min and c_max stocks
+            in the portfolio
     note: expected return is negated here so
           both objective can be minimized
     """
 
-    def __init__(self, df, w0):
+    def __init__(self, df, w0, w_min, w_max, c_min, c_max):
         n = len(w0)
-        xl = np.zeros(n)
-        xu = np.ones(n)
-        super().__init__(n, 2, 0, xl, xu)
+        xl = np.full(n, w_min)
+        xu = np.full(n, w_max)
+        super().__init__(n, 2, 2, xl, xu)
+
+        self.w_min = w_min
+        self.w_max = w_max
+        self.c_min = c_min
+        self.c_max = c_max
 
         change = df.pct_change()
 
@@ -27,15 +37,64 @@ class PortfolioSelection(Problem):
         self.cov = change.cov()
 
     def _evaluate(self, W, out, *args, **kwargs):
-        """
-        return
-            np.array([n, 2] (-expected return, risk)
-        """
         expected_return = W @ self.means
+        
+        risk = np.array([(w.T @ self.cov @ w) for w in W])
+
+        n_stocks = np.logical_and(W >= self.w_min, W <= self.w_max).sum(axis=1)
+        #n_stocks in solution needs to be between c_min and c_max
+        g1 = n_stocks - self.c_max
+        g2 = self.c_min - n_stocks
+
+        out["F"] = np.array([-expected_return, risk]).T
+        out["G"] = np.array([g1, g2]).T
+
+class PortfolioSelectionArima(Problem):
+    """
+    Portfolio selection problem
+    choose weight w_i for each asset n to
+    maximize expected return 
+    and minimize risk
+    subject to
+    w_min <= wi <= w_max
+    sum(wi) = 1
+    Cardinality constraint
+        there need to be between c_min and c_max stocks
+        in the portfolio
+    note: expected return is negated here so
+          both objective can be minimized
+    """
+
+    def __init__(self, df, w0, w_min, w_max, c_min, c_max):
+        n = len(w0)
+        xl = np.full(n, w_min)
+        xu = np.full(n, w_max)
+        super().__init__(n, 2, 0, xl, xu)
+        self.df = df
+        self.w_min = w_min
+        self.w_max = w_max
+        self.c_min = c_min
+        self.c_max = c_max
+
+        change = df.pct_change()
+        self.cov = change.cov()
+        rors = []
+        for c in df:
+            x = df[c]
+            arima = ARIMA(x, order=(2,1,2))
+            res = arima.fit()
+            x_hat = res.forecast(2)
+            a = x_hat[0]
+            b = x_hat[1]
+            rors.append((b - a)/a)
+
+        self.rors = np.array(rors)
+
+    def _evaluate(self, W, out, *args, **kwargs):
+        expected_return = W @ self.rors
         risk = np.array([(w.T @ self.cov @ w) for w in W])
 
         out["F"] = np.array([-expected_return, risk]).T
-
 
 # import data
 # df = data.get_data_df()
