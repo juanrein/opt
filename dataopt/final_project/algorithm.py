@@ -120,3 +120,5 @@ def main():
     WW = Res[:,:4] * Res[:,4:]
     print(WW)
     print(WW.sum(axis=1))
+
+# main()

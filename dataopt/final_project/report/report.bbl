@@ -57,6 +57,39 @@
       \field{pages}{3174\bibrangedash 3194}
       \range{pages}{21}
     \endentry
+    \entry{ertenlice2018survey}{article}{}
+      \name{author}{2}{}{%
+        {{hash=e74f1c801fa56dc52fcfacc22eb37803}{%
+           family={Ertenlice},
+           familyi={E\bibinitperiod},
+           given={Okkes},
+           giveni={O\bibinitperiod}}}%
+        {{hash=f63c7cca49b5c2e9a290b8c29f4a0b6d}{%
+           family={Kalayci},
+           familyi={K\bibinitperiod},
+           given={Can\bibnamedelima B},
+           giveni={C\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{c4fbb6328dedf2e190889f0d93d3d6fc}
+      \strng{fullhash}{c4fbb6328dedf2e190889f0d93d3d6fc}
+      \strng{bibnamehash}{c4fbb6328dedf2e190889f0d93d3d6fc}
+      \strng{authorbibnamehash}{c4fbb6328dedf2e190889f0d93d3d6fc}
+      \strng{authornamehash}{c4fbb6328dedf2e190889f0d93d3d6fc}
+      \strng{authorfullhash}{c4fbb6328dedf2e190889f0d93d3d6fc}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Swarm and evolutionary computation}
+      \field{title}{A survey of swarm intelligence for portfolio optimization: Algorithms and applications}
+      \field{volume}{39}
+      \field{year}{2018}
+      \field{pages}{36\bibrangedash 52}
+      \range{pages}{17}
+    \endentry
     \entry{faizan2019multiobjective}{article}{}
       \name{author}{1}{}{%
         {{hash=afad2a33e69cf26d856fdcf7e26e6c0b}{%
@@ -77,6 +110,45 @@
       \field{labeltitlesource}{title}
       \field{title}{Multiobjective portfolio optimization including sentiment analysis}
       \field{year}{2019}
+    \endentry
+    \entry{kaucic2019portfolio}{article}{}
+      \name{author}{3}{}{%
+        {{hash=209f8c5984b9d9f3ffbb247abefa5313}{%
+           family={Kaucic},
+           familyi={K\bibinitperiod},
+           given={Massimiliano},
+           giveni={M\bibinitperiod}}}%
+        {{hash=178e8e9f14e19ba062000947fade9923}{%
+           family={Moradi},
+           familyi={M\bibinitperiod},
+           given={Mojtaba},
+           giveni={M\bibinitperiod}}}%
+        {{hash=8a499e83556acf347227b06e8cc0374b}{%
+           family={Mirzazadeh},
+           familyi={M\bibinitperiod},
+           given={Mohmmad},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{f06883bf6922643aa51f963639d95e6b}
+      \strng{fullhash}{f06883bf6922643aa51f963639d95e6b}
+      \strng{bibnamehash}{f06883bf6922643aa51f963639d95e6b}
+      \strng{authorbibnamehash}{f06883bf6922643aa51f963639d95e6b}
+      \strng{authornamehash}{f06883bf6922643aa51f963639d95e6b}
+      \strng{authorfullhash}{f06883bf6922643aa51f963639d95e6b}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Financial Innovation}
+      \field{number}{1}
+      \field{title}{Portfolio optimization by improved NSGA-II and SPEA 2 based on different risk measures}
+      \field{volume}{5}
+      \field{year}{2019}
+      \field{pages}{1\bibrangedash 28}
+      \range{pages}{28}
     \endentry
     \entry{kolm201460}{article}{}
       \name{author}{3}{}{%

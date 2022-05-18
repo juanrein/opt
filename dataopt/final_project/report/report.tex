@@ -87,27 +87,81 @@ The stock price data was collected from Yahoo Finance by calling its api with di
 
 Where perdiod1 and period2 are the start and end times of the range as unix timestamps. 
 
+The stocks included in the problem where the stocks in eurostoxx 50 index.
+
+
 \section{Modelling}
 
-The problem can be modelled as a two objective optimization problem maximing expected return of the investment and minimizing its risk. The decision vector consist of proportions of total budget allocated to n stocks.
+The problem can be modelled as a two objective optimization problem maximing expected return of the investment and minimizing its risk. 
+
+\subsection{Variables}
+
+The decision vector consist of proportions of total budget allocated to n stocks $w = (w_1, w_2, ..., w_n)$ and binary variable for each stock which indicates whether the corresponding stock is included in the portfolio $y=(y_1, y_2,..., y_n)$. 
+
+\subsection{Constraints}
+
+It's assumed that the whole budget is used so the sum of weights should add up to one for the weight where the corresponding boolean flag is 1.
+
+Boundary constraint requires that the weights of each stock is between $w_{min}$ and $w_{max}$. Maximum limit makes it so that all budget is not allocated to too small number of stocks leading to diverse portfolio. Too small weights typically have little impact on the performance and weak liquidity and can be costly in respect to brokerage fess or monitoring costs \cite{ertenlice2018survey}.
+
+Cardinality constraint requires that the number of stocks included in the portfolio is between some two numbers $C_{min}$ and $C_{max}$. 
+
+\subsection{Objectives}
+
+Popular way to model these objectives is Markowitz model which is also known as mean-variance model \cite{kolm201460}.
+
+Given time series data of n stocks for time period of 0...T with stock price p(t, i) of stock i at time t. prices of stock i are a series $x_i$.
+
+$x_i = (p(0, i), p(1, i), ..., p(T, i))$\\
+
+Return of an investment between time t-1 to t for stock i is calculated by.
+
+$roi(t,i) = \frac{p(t,i) - p(t-1,i)}{p(t-1,i)}$
+
+Expected return for stock i is calculated as mean of each individual roi.
+
+$roi(i) = \frac{roi(1, i) + roi(2, i) + ... + roi(T, i)}{T-1}$
+
+Expected return for n stocks is calculated as weighted sum of all individual returns.
+
+$er(w,y) = \Sigma_{i=1}^{n} (w_i * y_i * roi(i))$
+
+Picking stocks where the price changes a lot is risky. This problem is increased by picking stocks where this happens similarly. This can be modelled using covariance of roi values \cite{kolm201460}. n x n square covariance matrix Cov contrains covariances of each roi(i) values. Given weights and inclusion flags, the risk for portfolio is given by.
+
+$risk(w,y) = (w^T * y) Cov (w * y)$
+
+\subsection{Problem}
+
+Putting all this together the whole problem is.
 
 \begin{equation}
 \begin{split}
-w = (w_1, w_2, ..., w_n)\\
-\Sigma_{i=1}^{n} w_i = 1\\
-0 \leq w_i \leq 1, i = 1...n
+minimize \{ risk(w,y), -er(w,y) \}\\
+\Sigma_{i=1}^n (w_i * y_i) = 1\\
+w_{min} \leq w_i \leq w_{max}, i = 1...n\\
+C_{min} \leq \Sigma_{i=1}^n y_i \leq C_{max}\\
+y_i \in \{0,1\}, i = 1...n\
 \end{split}
 \end{equation}
 
-Popular way to model these objectives is Markowitz model which is also known as mean-variance model and generalized as modern portfolio theory \cite{kolm201460}.
 
-Return of an investment between time t-1 to t is calculated by where p(t) and p(t-1) are stock prices at given time.
+\section{Algorithm and settings}
 
-$roi = \frac{p(t) - p(t-1)}{p(t-1)}$
+NSGA-II algorithm is used to solve the multiobjective constrained mixed-integer problem. 
+
+For the first n real variables simulated binary crossover and polynomial mutation are used. For the last n binary variables two-point binary crossover and bitflip mutation are used. Crossover probability is set to 1, mutation probability is set to $\frac{1}{50}$. Distribution index for real mutation and crossover are set to 3. 
+
+The constraint that the weight need to add up to one can be enforced using repair method \cite{kaucic2019portfolio}. The weights are first clamped to $w_{min}$ $w_{max}$ range. Then weight vector is element-wise multiplied by vector y to remove unselected stocks. Then each weight is divided by sum of all weights. It's easy to see that now weights add up to one. Special case where all weights are zero can be handled by assigning all weights with value $\frac{1}{n}$.
+
+\begin{equation}
+\begin{split}
+&\frac{w_1}{w_1 + w_2 + ... + w_n} + \frac{w_2}{w_1 + w_2 + ... + w_n} + \frac{w_n}{w_1 + w_2 + ... + w_n}\\
+&= \frac{w_1 + w_2 + ...  +w_n}{w_1 + w_2 + ... + w_n}\\
+&= 1
+\end{split}
+\end{equation}
 
 
-
-\section{Algorithm}
 
 \section{Results}
 

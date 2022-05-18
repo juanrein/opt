@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.4)  12 MAY 2022 15:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.4)  18 MAY 2022 20:01
 entering extended mode
 **./report.tex
 (report.tex
@@ -730,19 +730,24 @@ Overfull \hbox (52.89265pt too wide) in paragraph at lines 86--87
 e / download / ADS . DE ? period1 = 1620582946 &
  []
 
-[2] [3] (report.aux)
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
+
+ []
+
+[3] [4] [5] (report.aux)
 Package logreq Info: Writing requests to 'report.run.xml'.
 \openout1 = `report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 12497 strings out of 478907
- 230258 string characters out of 2846642
- 958173 words of memory out of 3000000
- 30242 multiletter control sequences out of 15000+600000
- 409999 words of font info for 50 fonts, out of 8000000 for 9000
+ 12504 strings out of 478907
+ 230510 string characters out of 2846642
+ 960254 words of memory out of 3000000
+ 30249 multiletter control sequences out of 15000+600000
+ 410907 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,15n,79p,741b,1212s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,15n,79p,741b,1223s stack positions out of 5000i,500n,10000p,200000b,80000s
 <C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
 msfonts/cm/cmmi10.pfb><C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/
 fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Juha Reinikainen/AppData/Loc
@@ -757,9 +762,9 @@ inen/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
 nts/cm/cmsy8.pfb><C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Juha Reinikainen/AppData/Local/P
 rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (3 pages, 143078 bytes).
+Output written on report.pdf (5 pages, 158077 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
+ 73 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
