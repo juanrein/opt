@@ -1,4 +1,3 @@
-from xml.dom.expatbuilder import parseFragmentString
 import numpy as np
 from pymoo.core.problem import Problem
 from statsmodels.tsa.arima.model import ARIMA
@@ -20,11 +19,11 @@ class PortfolioSelection(Problem):
           both objective can be minimized
     """
 
-    def __init__(self, df, w_min, w_max, c_min, c_max, n_stocks):
+    def __init__(self, df, ecg, w_min, w_max, c_min, c_max, n_stocks):
         xl = np.concatenate((np.full(n_stocks, w_min), np.zeros(n_stocks, dtype=int)))
         xu = np.concatenate((np.full(n_stocks, w_max), np.ones(n_stocks, dtype=int)))
 
-        super().__init__(2 * n_stocks, 2, 2, xl, xu)
+        super().__init__(2 * n_stocks, 3, 2, xl, xu)
 
         self.w_min = w_min
         self.w_max = w_max
@@ -33,6 +32,8 @@ class PortfolioSelection(Problem):
         self.n_stocks = n_stocks
 
         change = df.pct_change()
+        
+        self.ecg = ecg
 
         self.means = change.mean(axis=0)
         self.cov = change.cov()
@@ -44,60 +45,63 @@ class PortfolioSelection(Problem):
         expected_return = WW @ self.means
         
         risk = np.array([(w.T @ self.cov @ w) for w in WW])
+        ecg_score = WW @ self.ecg
 
         n_stocks_in_portfolio = Y.sum(axis=1)
         #n_stocks in solution needs to be between c_min and c_max
         g1 = n_stocks_in_portfolio - self.c_max
         g2 = self.c_min - n_stocks_in_portfolio
 
-        out["F"] = np.array([-expected_return, risk]).T
+        out["F"] = np.array([-expected_return, risk, -ecg_score]).T
         out["G"] = np.array([g1, g2]).T
 
-class PortfolioSelectionArima(Problem):
-    """
-    Portfolio selection problem
-    choose weight w_i for each asset n to
-    maximize expected return 
-    and minimize risk
-    subject to
-    w_min <= wi <= w_max
-    sum(wi) = 1
-    Cardinality constraint
-        there need to be between c_min and c_max stocks
-        in the portfolio
-    note: expected return is negated here so
-          both objective can be minimized
-    """
-    def __init__(self, df, w0, w_min, w_max, c_min, c_max):
-        n = len(w0)
-        xl = np.full(n, w_min)
-        xu = np.full(n, w_max)
-        super().__init__(n, 2, 0, xl, xu)
-        self.df = df
-        self.w_min = w_min
-        self.w_max = w_max
-        self.c_min = c_min
-        self.c_max = c_max
 
-        change = df.pct_change()
-        self.cov = change.cov()
-        rors = []
-        for c in df:
-            x = df[c]
-            arima = ARIMA(x, order=(2,1,2))
-            res = arima.fit()
-            x_hat = res.forecast(2)
-            a = x_hat[0]
-            b = x_hat[1]
-            rors.append((b - a)/a)
 
-        self.rors = np.array(rors)
+# class PortfolioSelectionArima(Problem):
+#     """
+#     Portfolio selection problem
+#     choose weight w_i for each asset n to
+#     maximize expected return 
+#     and minimize risk
+#     subject to
+#     w_min <= wi <= w_max
+#     sum(wi) = 1
+#     Cardinality constraint
+#         there need to be between c_min and c_max stocks
+#         in the portfolio
+#     note: expected return is negated here so
+#           both objective can be minimized
+#     """
+#     def __init__(self, df, w0, w_min, w_max, c_min, c_max):
+#         n = len(w0)
+#         xl = np.full(n, w_min)
+#         xu = np.full(n, w_max)
+#         super().__init__(n, 2, 0, xl, xu)
+#         self.df = df
+#         self.w_min = w_min
+#         self.w_max = w_max
+#         self.c_min = c_min
+#         self.c_max = c_max
 
-    def _evaluate(self, W, out, *args, **kwargs):
-        expected_return = W @ self.rors
-        risk = np.array([(w.T @ self.cov @ w) for w in W])
+#         change = df.pct_change()
+#         self.cov = change.cov()
+#         rors = []
+#         for c in df:
+#             x = df[c]
+#             arima = ARIMA(x, order=(2,1,2))
+#             res = arima.fit()
+#             x_hat = res.forecast(2)
+#             a = x_hat[0]
+#             b = x_hat[1]
+#             rors.append((b - a)/a)
 
-        out["F"] = np.array([-expected_return, risk]).T
+#         self.rors = np.array(rors)
+
+#     def _evaluate(self, W, out, *args, **kwargs):
+#         expected_return = W @ self.rors
+#         risk = np.array([(w.T @ self.cov @ w) for w in W])
+
+#         out["F"] = np.array([-expected_return, risk]).T
 
 # import data
 # df = data.get_data_df()

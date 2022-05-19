@@ -1,8 +1,9 @@
+from operator import index
 from urllib.request import urlopen
 import pandas as pd
 import os
 from datetime import datetime
-
+import numpy as np
 
 URLTEMPLATE = "https://query1.finance.yahoo.com/v7/finance/download/{}?period1={}&period2={}&interval=1wk&events=history&includeAdjustedClose=true"
 STOCKNAMES = [
@@ -15,7 +16,7 @@ STOCKNAMES = [
     "ABI.BR",
     "ASML.AS",
     "CS.PA",
-    "CS.PA",
+    "BAS.DE",
     "BAYN.DE",
     "BBVA.MC",
     "SAN.MC",
@@ -57,7 +58,11 @@ STOCKNAMES = [
     "VOW.DE",
     "VNA.DE",
 ]
+
+    
 FILENAME = "./data/stock_prices.csv"
+ESGFILENAME = "./data/esg.csv"
+
 STARTDATE = int(datetime(2018, 1, 1).timestamp())
 ENDDATE = int(datetime(2022, 1, 1).timestamp())
 
@@ -87,8 +92,29 @@ def fetch_stock_prices():
 
 def get_data_df():
     """
-    Get data as a pandas dataframe
+    Get stock price data and ESG scores
     """
-    return pd.read_csv(FILENAME, index_col=0, parse_dates=True)
+    prices = pd.read_csv(FILENAME, index_col=0, parse_dates=True)
+    esgdf = pd.read_csv("./data/esg.csv", sep=";", index_col=0, decimal=",")
+    esg = esgdf["esg"]
+    return prices, esg
+
+def getESGscores():
+    #https://www.kaggle.com/datasets/debashish311601/esg-scores-and-ratings?resource=download
+    df = pd.read_csv("./data/MSCI_esg.csv", index_col=1)
+    tickets = list(map(lambda x: x[:x.index(".")], STOCKNAMES))
+    for ticket in tickets:
+        stock = df.loc[ticket]
+        if type(stock) == pd.DataFrame:
+            x = list(zip(stock["Company Name"], stock["Overall ESG SCORE"]))
+            print(ticket, x)
+            print("-" * 20)
+        elif type(stock) == pd.Series:
+            print(ticket, stock["Overall ESG SCORE"])
+            print("-" * 20)
+        else:
+            raise ValueError("fdas") 
+        #Overall ESG SCORE, Environmental SCORE, Social SCORE, Governance SCORE
 
 # fetch_stock_prices()
+# getESGscores()
