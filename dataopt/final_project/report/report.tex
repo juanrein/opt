@@ -15,7 +15,7 @@
 %%% PAGE DIMENSIONS
 \usepackage{geometry} % to change the page dimensions
 \geometry{a4paper} % or letterpaper (US) or a5paper or....
-% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+\geometry{margin=2cm} % for example, change the margins to 2 inches all round
 % \geometry{landscape} % set up the page for landscape
 %   read geometry.pdf for detailed page layout information
 
@@ -92,7 +92,7 @@ The stocks included in the problem where the stocks in eurostoxx 50 index.
 
 \section{Modelling}
 
-The problem can be modelled as a two objective optimization problem maximing expected return of the investment and minimizing its risk. 
+The problem can be modelled as a three objective optimization problem maximing expected return of the investment, minimizing its risk and maximizing social responsibility.
 
 \subsection{Variables}
 
@@ -130,13 +130,21 @@ Picking stocks where the price changes a lot is risky. This problem is increased
 
 $risk(w,y) = (w^T * y) Cov (w * y)$
 
+Third objective included in the problem is social responsibility which can be modelled using environmental, social and governance (ESG) score \cite{chen2021social}. Taking social responsibility into consideration can lead to long-term advantages as risk of a company losing face over its actions is common. There are multiple ways to compute the ESG score and multiple organizations that do it. For this project the scores were acquired from Kaggle dataset \url{https://www.kaggle.com/datasets/debashish311601/esg-scores-and-ratings?resource=download}. The needed 50 `Overall ESG SCORE'-values for the stocks were then gathered. 
+
+The overall social responsibility value for a portfolio is calculated as weighted sum of stock esg scores and weight of each stock.
+
+$esg(w,y) = \Sigma_{i=1}^n (w_i * y_i * esg_i)$
+
+
+
 \subsection{Problem}
 
 Putting all this together the whole problem is.
 
 \begin{equation}
 \begin{split}
-minimize \{ risk(w,y), -er(w,y) \}\\
+minimize \{ risk(w,y), -er(w,y), -esg(w,y) \}\\
 \Sigma_{i=1}^n (w_i * y_i) = 1\\
 w_{min} \leq w_i \leq w_{max}, i = 1...n\\
 C_{min} \leq \Sigma_{i=1}^n y_i \leq C_{max}\\
@@ -161,9 +169,10 @@ The constraint that the weight need to add up to one can be enforced using repai
 \end{split}
 \end{equation}
 
-
+$C_{min}$ was set to 4 and $C_{max}$ to 20 to make sure that the budget is allocated to sufficient amount of stocks. $w_{min}$ was set to 0.01 and $w_{max}$ to 0.8. 
 
 \section{Results}
+
 
 
 \printbibliography %Prints bibliography

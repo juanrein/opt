@@ -19,6 +19,55 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{chen2021social}{article}{}
+      \name{author}{5}{}{%
+        {{hash=685d97480ebafb5a158e7c3dfdcb69a8}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Li},
+           giveni={L\bibinitperiod}}}%
+        {{hash=3abbde603dcababb7f327074bf1fc596}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Lipei},
+           giveni={L\bibinitperiod}}}%
+        {{hash=733256c2452217b6cec8912fa1abf4eb}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Jun},
+           giveni={J\bibinitperiod}}}%
+        {{hash=58cf64d134caf2b483eff0c14f983d9d}{%
+           family={Xiao},
+           familyi={X\bibinitperiod},
+           given={Helu},
+           giveni={H\bibinitperiod}}}%
+        {{hash=59db3e7c6b89f71d506b8f74d9ec557f}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Zhongbao},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{d0145314fb6db74c3c705bc6b2c8f435}
+      \strng{fullhash}{3f5ea86a8e0110f9731dbf3769e4a8a1}
+      \strng{bibnamehash}{d0145314fb6db74c3c705bc6b2c8f435}
+      \strng{authorbibnamehash}{d0145314fb6db74c3c705bc6b2c8f435}
+      \strng{authornamehash}{d0145314fb6db74c3c705bc6b2c8f435}
+      \strng{authorfullhash}{3f5ea86a8e0110f9731dbf3769e4a8a1}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Management Science and Engineering}
+      \field{number}{1}
+      \field{title}{Social responsibility portfolio optimization incorporating ESG criteria}
+      \field{volume}{6}
+      \field{year}{2021}
+      \field{pages}{75\bibrangedash 85}
+      \range{pages}{11}
+    \endentry
     \entry{du2020new}{article}{}
       \name{author}{3}{}{%
         {{hash=e6b171fbe73377d6d4fb8be464f952c7}{%

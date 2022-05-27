@@ -1,9 +1,7 @@
-from operator import index
 from urllib.request import urlopen
 import pandas as pd
 import os
 from datetime import datetime
-import numpy as np
 
 URLTEMPLATE = "https://query1.finance.yahoo.com/v7/finance/download/{}?period1={}&period2={}&interval=1wk&events=history&includeAdjustedClose=true"
 STOCKNAMES = [
@@ -95,11 +93,14 @@ def get_data_df():
     Get stock price data and ESG scores
     """
     prices = pd.read_csv(FILENAME, index_col=0, parse_dates=True)
-    esgdf = pd.read_csv("./data/esg.csv", sep=";", index_col=0, decimal=",")
+    esgdf = pd.read_csv(ESGFILENAME, sep=";", index_col=0, decimal=",")
     esg = esgdf["esg"]
     return prices, esg
 
 def getESGscores():
+    """
+    Print esg scores for the stocks
+    """
     #https://www.kaggle.com/datasets/debashish311601/esg-scores-and-ratings?resource=download
     df = pd.read_csv("./data/MSCI_esg.csv", index_col=1)
     tickets = list(map(lambda x: x[:x.index(".")], STOCKNAMES))
