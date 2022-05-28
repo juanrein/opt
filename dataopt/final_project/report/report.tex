@@ -19,10 +19,12 @@
 % \geometry{landscape} % set up the page for landscape
 %   read geometry.pdf for detailed page layout information
 
+
 \usepackage{setspace}
 \setstretch{1.5}
 
 \usepackage{graphicx} % support the \includegraphics command and options
+\graphicspath{ {./img/} }
 
 \usepackage{biblatex} %Imports biblatex package
 \addbibresource{sources.bib} %Import the bibliography file
@@ -108,21 +110,22 @@ Cardinality constraint requires that the number of stocks included in the portfo
 
 \subsection{Objectives}
 
-Popular way to model these objectives is Markowitz model which is also known as mean-variance model \cite{kolm201460}.
+Popular way to model these objectives is Markowitz model which is also known as mean-variance model \cite{kolm201460}. The risk measure from that model is used. For predicting the prices of individual stocks ARIMA model is used. ARIMA is a popular time series prediction model which also has been used in portfolio optimization \cite{kumar2021multi}. 
 
 Given time series data of n stocks for time period of 0...T with stock price p(t, i) of stock i at time t. prices of stock i are a series $x_i$.
 
 $x_i = (p(0, i), p(1, i), ..., p(T, i))$\\
 
-Return of an investment between time t-1 to t for stock i is calculated by.
+Prices can be computed into future for wanted number of steps using ARIMA. ARIMA depends of three parameters: p,d,q. p is the order of the auto-regressive model (AR), d is the degree of differencing (I) and q is the order of moving average (MA) model. Since there are 50 models to be trained (for each stock), these parameters are optimized using lbfgs optimizer to find good parameters from range 1-5 for these three parameters.
 
-$roi(t,i) = \frac{p(t,i) - p(t-1,i)}{p(t-1,i)}$
+This gives us a new series.
+$x_i^{future} = (p(T+1, i), p(T+2, i), ..., p(T+steps, i))$
 
-Expected return for stock i is calculated as mean of each individual roi.
+Return of an investment for stock i is calculated by.
 
-$roi(i) = \frac{roi(1, i) + roi(2, i) + ... + roi(T, i)}{T-1}$
+$roi(i) = \frac{p(T+steps,i) - p(T,i)}{p(T,i)}$
 
-Expected return for n stocks is calculated as weighted sum of all individual returns.
+Expected return for portfolio is calculated as weighted sum of all individual returns.
 
 $er(w,y) = \Sigma_{i=1}^{n} (w_i * y_i * roi(i))$
 
@@ -155,7 +158,7 @@ y_i \in \{0,1\}, i = 1...n\
 
 \section{Algorithm and settings}
 
-NSGA-II algorithm is used to solve the multiobjective constrained mixed-integer problem. 
+NSGA-II algorithm is used to solve the multiobjective constrained mixed-integer problem. The algorithm is run for 1000 generations with population size 100.
 
 For the first n real variables simulated binary crossover and polynomial mutation are used. For the last n binary variables two-point binary crossover and bitflip mutation are used. Crossover probability is set to 1, mutation probability is set to $\frac{1}{50}$. Distribution index for real mutation and crossover are set to 3. 
 
@@ -171,8 +174,21 @@ The constraint that the weight need to add up to one can be enforced using repai
 
 $C_{min}$ was set to 4 and $C_{max}$ to 20 to make sure that the budget is allocated to sufficient amount of stocks. $w_{min}$ was set to 0.01 and $w_{max}$ to 0.8. 
 
+For the experiment, similar approach to one outlined in \cite{xidonas2018multiobjective} is used. First the arima models are trained with data from 1.1.2018 to 1.1.2022 and prediction of expected return is made to 1.4.2022. Then the model is validated on the actual return from 1.1.2022 to 1.4.2022 using mean absolute error. Then the model is retrained using data from 1.1.2018 to 1.4.2022 to do prediction to 1.7.2022.
+
+
 \section{Results}
 
+The error of the model in the validation was 0.1.
+After 1000 generations and 100000 function evaluations all the 100 solutions were feasible and nondominated in respect to each other. The algorithm was able to find a diverse set of solutions in respect to all the objectives. The following parallel coordinate plot depicts the 100 solutions in objectives space. 
+
+\includegraphics{pcpPlot}
+
+The horizontal bar chart contains the mean weight given to each stock from the 100 solutions.
+\hspace*{-1.5cm}
+\includegraphics[scale=0.45]{meanW}
+
+The final solution was picked using Nautilus navigator. 
 
 
 \printbibliography %Prints bibliography

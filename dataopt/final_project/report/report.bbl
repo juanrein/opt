@@ -238,6 +238,92 @@
       \field{pages}{356\bibrangedash 371}
       \range{pages}{16}
     \endentry
+    \entry{kumar2021multi}{article}{}
+      \name{author}{3}{}{%
+        {{hash=343e3048b99c5d4efb615af4c770c7d1}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Raghavendra},
+           giveni={R\bibinitperiod}}}%
+        {{hash=d8dc9d28f2775b4ef34a871344b74507}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Pardeep},
+           giveni={P\bibinitperiod}}}%
+        {{hash=cee556d26ca9fa5b4bbf497b3a7ce340}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Yugal},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{7bf7b1c3b3177f3298e036a26041f7ca}
+      \strng{fullhash}{7bf7b1c3b3177f3298e036a26041f7ca}
+      \strng{bibnamehash}{7bf7b1c3b3177f3298e036a26041f7ca}
+      \strng{authorbibnamehash}{7bf7b1c3b3177f3298e036a26041f7ca}
+      \strng{authornamehash}{7bf7b1c3b3177f3298e036a26041f7ca}
+      \strng{authorfullhash}{7bf7b1c3b3177f3298e036a26041f7ca}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Information Technology}
+      \field{title}{Multi-step time series analysis and forecasting strategy using ARIMA and evolutionary algorithms}
+      \field{year}{2021}
+      \field{pages}{1\bibrangedash 15}
+      \range{pages}{15}
+    \endentry
+    \entry{xidonas2018multiobjective}{article}{}
+      \name{author}{5}{}{%
+        {{hash=2f1751b0fd7615d1a13dae62e52af695}{%
+           family={Xidonas},
+           familyi={X\bibinitperiod},
+           given={Panos},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1af887cdf40c90a648d7238398a61815}{%
+           family={Hassapis},
+           familyi={H\bibinitperiod},
+           given={Christis},
+           giveni={C\bibinitperiod}}}%
+        {{hash=576760c68fc2e21f2397597258c633a2}{%
+           family={Mavrotas},
+           familyi={M\bibinitperiod},
+           given={George},
+           giveni={G\bibinitperiod}}}%
+        {{hash=4aad2617e79297177257875200fc471c}{%
+           family={Staikouras},
+           familyi={S\bibinitperiod},
+           given={Christos},
+           giveni={C\bibinitperiod}}}%
+        {{hash=aea1df1f0850d0a610ee760df595da64}{%
+           family={Zopounidis},
+           familyi={Z\bibinitperiod},
+           given={Constantin},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{7f9d73ae97366f7a876c2f99ef6b837c}
+      \strng{fullhash}{0bfac47cc8b0faeeff0b569b7f71636d}
+      \strng{bibnamehash}{7f9d73ae97366f7a876c2f99ef6b837c}
+      \strng{authorbibnamehash}{7f9d73ae97366f7a876c2f99ef6b837c}
+      \strng{authornamehash}{7f9d73ae97366f7a876c2f99ef6b837c}
+      \strng{authorfullhash}{0bfac47cc8b0faeeff0b569b7f71636d}
+      \field{sortinit}{X}
+      \field{sortinithash}{1965c258adceecf23ce3d67b05113442}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annals of Operations Research}
+      \field{number}{1}
+      \field{title}{Multiobjective portfolio optimization: bridging mathematical theory with asset management practice}
+      \field{volume}{267}
+      \field{year}{2018}
+      \field{pages}{585\bibrangedash 606}
+      \range{pages}{22}
+    \endentry
     \entry{van2021parden}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=8a5e1a37685dc1534bef73f695e12a0f}{%
