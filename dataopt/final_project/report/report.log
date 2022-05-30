@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.4)  30 MAY 2022 17:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.4)  30 MAY 2022 22:42
 entering extended mode
 **./report.tex
 (report.tex
@@ -505,6 +505,15 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 LaTeX Info: Redefining \[ on input line 2923.
 LaTeX Info: Redefining \] on input line 2924.
 )
+(C:\Users\Juha Reinikainen\AppData\Local\Programs\MiKTeX\tex/latex/float\float.
+sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count410
+\float@exts=\toks29
+\float@box=\box54
+\@float@everytoks=\toks30
+\@floatcapt=\box55
+)
 (C:\Users\Juha Reinikainen\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fan
 cyhdr.sty
 Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
@@ -584,14 +593,14 @@ Package tocloft Info: The document has section divisions on input line 51.
 \cftsubtabindent=\skip129
 \cftsubtabnumwidth=\skip130
 )
-\@quotelevel=\count410
-\@quotereset=\count411
+\@quotelevel=\count411
+\@quotereset=\count412
 
 (C:\Users\Juha Reinikainen\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3
 backend-pdftex.def
 File: l3backend-pdftex.def 2021-10-18 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count412
-\l__pdf_internal_box=\box54
+\l__color_backend_stack_int=\count413
+\l__pdf_internal_box=\box56
 ) (report.aux)
 \openout1 = `report.aux'.
 
@@ -648,17 +657,17 @@ LaTeX Font Info:    ... okay on input line 73.
 (C:\Users\Juha Reinikainen\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\
 supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count413
+\scratchcounter=\count414
 \scratchdimen=\dimen181
-\scratchbox=\box55
-\nofMPsegments=\count414
-\nofMParguments=\count415
-\everyMPshowfont=\toks29
-\MPscratchCnt=\count416
+\scratchbox=\box57
+\nofMPsegments=\count415
+\nofMParguments=\count416
+\everyMPshowfont=\toks31
+\MPscratchCnt=\count417
 \MPscratchDim=\dimen182
-\MPnumerator=\count417
-\makeMPintoPDFobject=\count418
-\everyMPtoPDFconversion=\toks30
+\MPnumerator=\count418
+\makeMPintoPDFobject=\count419
+\everyMPtoPDFconversion=\toks32
 )
 (C:\Users\Juha Reinikainen\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg
 \epstopdf-base.sty
@@ -721,38 +730,45 @@ Package biblatex Info: Reference section=0 on input line 73.
 Package biblatex Info: Reference segment=0 on input line 73.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
+ [1
 
-Overfull \hbox (33.43896pt too wide) in paragraph at lines 88--89
+{C:/Users/Juha Reinikainen/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
+
+ []
+
+[2]
+Overfull \hbox (33.43896pt too wide) in paragraph at lines 155--156
 []$\OT1/cmtt/m/n/10.95 https : / / query1 . finance . yahoo . com / v7 / financ
 e / download / ADS . DE ? period1 = 1620582946 & period2 =
  []
 
-[1
 
-{C:/Users/Juha Reinikainen/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
-
+Overfull \hbox (4.36436pt too wide) in paragraph at lines 159--160
+[]\OT1/cmr/m/n/10.95 For this project the scores were ac-quired from Kag-gle da
+taset $\OT1/cmtt/m/n/10.95 https : / / www . kaggle . com / datasets /
  []
 
-[2] [3] [4]
-<./img//pcpPlot.png, id=24, 461.725pt x 393.47pt>
+[3] [4]
+<./img//pcpPlot.png, id=25, 461.725pt x 393.47pt>
 File: ./img//pcpPlot.png Graphic file (type png)
 <use ./img//pcpPlot.png>
-Package pdftex.def Info: ./img//pcpPlot.png  used on input line 245.
+Package pdftex.def Info: ./img//pcpPlot.png  used on input line 256.
 (pdftex.def)             Requested size: 461.72388pt x 393.46902pt.
  [5]
-<./img//meanW.png, id=29, 1196.47pt x 1134.2375pt>
+<./img//meanW.png, id=30, 1196.47pt x 1134.2375pt>
 File: ./img//meanW.png Graphic file (type png)
 <use ./img//meanW.png>
-Package pdftex.def Info: ./img//meanW.png  used on input line 249.
+Package pdftex.def Info: ./img//meanW.png  used on input line 264.
 (pdftex.def)             Requested size: 538.40652pt x 510.40216pt.
 
-Overfull \hbox (14.46387pt too wide) in paragraph at lines 247--250
-|  [] 
+Overfull \hbox (14.46387pt too wide) in paragraph at lines 263--265
+[]|  [] 
  []
 
-[6 <./img//pcpPlot.png>] [7 <./img//meanW.png>] [8] (report.aux)
+[6 <./img//pcpPlot.png>] [7 <./img//meanW.png>] [8] [9] (report.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -766,30 +782,31 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 12535 strings out of 478907
- 231258 string characters out of 2846642
- 966488 words of memory out of 3000000
- 30277 multiletter control sequences out of 15000+600000
- 410907 words of font info for 53 fonts, out of 8000000 for 9000
+ 12601 strings out of 478907
+ 232276 string characters out of 2846642
+ 969865 words of memory out of 3000000
+ 30338 multiletter control sequences out of 15000+600000
+ 411215 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,15n,79p,741b,1212s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,15n,79p,741b,1185s stack positions out of 5000i,500n,10000p,200000b,80000s
 <C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
-msfonts/cm/cmmi10.pfb><C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Juha Reinikainen/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Juha Rein
-ikainen/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-<C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmr17.pfb><C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Juha Reinikainen/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Users/Juha Reinika
-inen/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
+msfonts/cm/cmbx10.pfb><C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Juha Reinikainen/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Juha Rei
+nikainen/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb
+><C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmr12.pfb><C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Juha Reinikainen/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Juha Reinika
+inen/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C
 :/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmsy8.pfb><C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Juha Reinikainen/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (8 pages, 297207 bytes).
+nts/cm/cmsy10.pfb><C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Juha Reinikainen/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Juha Reinika
+inen/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on report.pdf (9 pages, 347765 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
+ 97 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
