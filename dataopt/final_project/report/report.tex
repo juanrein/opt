@@ -174,13 +174,73 @@ The constraint that the weight need to add up to one can be enforced using repai
 
 $C_{min}$ was set to 4 and $C_{max}$ to 20 to make sure that the budget is allocated to sufficient amount of stocks. $w_{min}$ was set to 0.01 and $w_{max}$ to 0.8. 
 
-For the experiment, similar approach to one outlined in \cite{xidonas2018multiobjective} is used. First the arima models are trained with data from 1.1.2018 to 1.1.2022 and prediction of expected return is made to 1.4.2022. Then the model is validated on the actual return from 1.1.2022 to 1.4.2022 using mean absolute error. Then the model is retrained using data from 1.1.2018 to 1.4.2022 to do prediction to 1.7.2022.
-
+The ARIMA models are trained on stock prices data from 1.4.2018 to 1.4.2022. Prediction is done 3 months into future (1.7.2022) with these models to get price prediction. The models are also cross validated using sliding window technique and mean symmetric mean absolute percentage error (smape) score is computed for the models.
 
 \section{Results}
 
 The error of the model in the validation was 0.1.
 After 1000 generations and 100000 function evaluations all the 100 solutions were feasible and nondominated in respect to each other. The algorithm was able to find a diverse set of solutions in respect to all the objectives. The following parallel coordinate plot depicts the 100 solutions in objectives space. 
+
+\begin{tabular}{| c | c | }
+\hline
+stock    & SMAPE\\
+\hline
+ADS.DE   & 8.178385746708626\\
+ADYEN.AS & 10.641090818052325\\
+AD.AS    & 5.408601054821343\\
+AI.PA    & 4.786506648996402\\
+AIR.PA   & 11.846596331941681\\
+ALV.DE   & 7.019777303513461\\
+ABI.BR   & 9.809535329106653\\
+ASML.AS  & 8.526407784730827\\
+CS.PA    & 8.955262184806415\\
+BAS.DE   & 7.996981181671698\\
+BAYN.DE  & 8.671662640055118\\
+BBVA.MC  & 11.018076694228448\\
+SAN.MC   & 10.875880871596674\\
+BMW.DE   & 8.921097861343082\\
+BNP.PA   & 11.041334277715546\\
+CRG.IR   & 7.355815124187261\\
+BN.PA    & 5.411205090121721\\
+DB1.DE   & 5.620575889394867\\
+DPW.DE   & 8.566878522693125\\
+DTE.DE   & 5.363621193290268\\
+ENEL.MI  & 6.760362644618639\\
+ENI.MI   & 8.772337667774167\\
+EL.PA    & 6.815978917387625\\
+FLTR.IR  & 10.613981495085303\\
+RMS.PA   & 6.811196472577539\\
+\end{tabular}
+\begin{tabular}{ | c | c |}
+\hline
+stock    & SMAPE\\
+\hline
+IBE.MC   & 6.152322262080069\\
+ITX.MC   & 7.219939644782287\\
+IFX.DE   & 11.013903240141746\\
+INGA.AS  & 12.135879754372953\\
+ISP.MI   & 9.915104274969671\\
+KER.PA   & 8.717096271195077\\
+KNEBV.HE & 6.111059398376292\\
+OR.PA    & 5.782518002224039\\
+LIN.DE   & 6.220693243454447\\
+MC.PA    & 7.2218918200092075\\
+MBG.DE   & 11.535518384043854\\
+MUV2.DE  & 7.50525191886549\\
+RI.PA    & 5.10132777229795\\
+PHIA.AS  & 7.702788221951842\\
+PRX.AS   & 6.7844902920183365\\
+SAF.PA   & 9.667711825509839\\
+SAN.PA   & 4.833909652382033\\
+SAP.DE   & 7.825813071268087\\
+SU.PA    & 6.757823303514715\\
+SIE.DE   & 8.350806969589772\\
+STLA.MI  & 10.773282376469194\\
+TTE.PA   & 8.226394503407779\\
+DG.PA    & 6.682632458975507\\
+VOW.DE   & 8.87749659412905\\
+VNA.DE   & 5.716103089466694\\
+\end{tabular}
 
 \includegraphics{pcpPlot}
 

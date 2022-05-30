@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.4)  28 MAY 2022 21:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.11.4)  30 MAY 2022 17:11
 entering extended mode
 **./report.tex
 (report.tex
@@ -735,24 +735,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
  []
 
-[2] [3]
-<./img//pcpPlot.png, id=21, 461.725pt x 393.47pt>
+[2] [3] [4]
+<./img//pcpPlot.png, id=24, 461.725pt x 393.47pt>
 File: ./img//pcpPlot.png Graphic file (type png)
 <use ./img//pcpPlot.png>
-Package pdftex.def Info: ./img//pcpPlot.png  used on input line 185.
+Package pdftex.def Info: ./img//pcpPlot.png  used on input line 245.
 (pdftex.def)             Requested size: 461.72388pt x 393.46902pt.
- [4]
-<./img//meanW.png, id=26, 1196.47pt x 1134.2375pt>
+ [5]
+<./img//meanW.png, id=29, 1196.47pt x 1134.2375pt>
 File: ./img//meanW.png Graphic file (type png)
 <use ./img//meanW.png>
-Package pdftex.def Info: ./img//meanW.png  used on input line 189.
+Package pdftex.def Info: ./img//meanW.png  used on input line 249.
 (pdftex.def)             Requested size: 538.40652pt x 510.40216pt.
 
-Overfull \hbox (14.46387pt too wide) in paragraph at lines 187--190
+Overfull \hbox (14.46387pt too wide) in paragraph at lines 247--250
 |  [] 
  []
 
-[5 <./img//pcpPlot.png>] [6 <./img//meanW.png>] [7] (report.aux)
+[6 <./img//pcpPlot.png>] [7 <./img//meanW.png>] [8] (report.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                report
+(biblatex)                and rerun LaTeX afterwards.
+
 Package logreq Info: Writing requests to 'report.run.xml'.
 \openout1 = `report.run.xml'.
 
@@ -760,7 +768,7 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 Here is how much of TeX's memory you used:
  12535 strings out of 478907
  231258 string characters out of 2846642
- 962540 words of memory out of 3000000
+ 966488 words of memory out of 3000000
  30277 multiletter control sequences out of 15000+600000
  410907 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -779,9 +787,9 @@ inen/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
 nts/cm/cmsy8.pfb><C:/Users/Juha Reinikainen/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Juha Reinikainen/AppData/Local/P
 rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report.pdf (7 pages, 294032 bytes).
+Output written on report.pdf (8 pages, 297207 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
+ 89 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -61,8 +61,8 @@ STOCKNAMES = [
 FILENAME = "./data/stock_prices.csv"
 ESGFILENAME = "./data/esg.csv"
 
-STARTDATE = int(datetime(2018, 1, 1).timestamp())
-ENDDATE = int(datetime(2022, 3, 1).timestamp())
+STARTDATE = int(datetime(2018, 4, 1).timestamp())
+ENDDATE = int(datetime(2022, 4, 1).timestamp())
 
 def fetch_stock_prices():
     """
